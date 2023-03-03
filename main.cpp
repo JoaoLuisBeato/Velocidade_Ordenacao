@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <random>
 
 using namespace std;
 using namespace std::chrono;
@@ -7,8 +8,13 @@ using namespace std::chrono;
 
 void fill_array(int size, int vetor[]){
 
+    random_device random;
+    default_random_engine engine {random()};
+    uniform_int_distribution<> dist{20, 2000001};
+
+
     for(int i = 0; i < size; i++)
-        vetor[i] = 20 + (rand() % 1999981);
+        vetor[i] = dist(engine);
 }
 
 double bubble_sort(int size, int vetor[]){
@@ -71,6 +77,7 @@ double normal_search(int vetor[], int size, int num_search){
     double tempo = time.count();
     return tempo;
 }
+
 double binarySearch(int arr[], int x, int l, int r) {
     //- comeca
     auto start = steady_clock::now();
@@ -198,7 +205,6 @@ int main(){
             case 1:
                 tempo = bubble_sort(size, array);
                 print_array(size, array);
-                cout << "\n\nTempo micro: " << tempo << endl;
                 print_time(tempo);
                 break;
 
@@ -226,7 +232,7 @@ int main(){
                 cout << "\n\n==========================\n";
                 cout << "Qual numero deseja procurar?: ";
                 cin >> num_search;
-                tempo = normal_search(array, size-1, num_search);
+                tempo = normal_search(array, size, num_search);
                 print_time(tempo);
                 break;
                 
