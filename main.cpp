@@ -147,6 +147,12 @@ int Message(){
 
 }
 
+void print_array(int size, int vetor[]){
+    for(int i = 0; i < size; i++){
+        cout << vetor[i] << " ";
+    }
+}
+
 int main(){
 
     cout << "Hello, world!" << endl;
