@@ -4,6 +4,27 @@
 using namespace std;
 using namespace std::chrono;
 
+double insertion_sort(int size, int vetor[]) {
+
+    auto start = steady_clock::now();
+
+    for (int i = 1; i < size; i++) {
+        int escolhido = vetor[i];
+        int j = i - 1;
+        
+        while ((j >= 0) && (vetor[j] > escolhido)) {
+            vetor[j + 1] = vetor[j];
+            j--;
+        }
+        vetor[j + 1] = escolhido;
+    }
+
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+    
+    double tempo = time.count();
+    return tempo;
+}
 
 double normal_search(int vetor[], int size, int num_search){ 
     
@@ -22,7 +43,7 @@ double normal_search(int vetor[], int size, int num_search){
             cout << "\n\nO numero buscado nao existe" << endl;
         }
         //cout << "\n\n==========================\n";
-    
+}
 double binarySearch(int arr[], int x, int l, int r) {
     //- comeca
     auto start = steady_clock::now();
@@ -54,7 +75,7 @@ double binarySearch(int arr[], int x, int l, int r) {
     duration<double, std::micro> time = end - start;
     double tempo = time.count();
     return tempo;
-
+}
 int split(int vetor[], int low, int high){
 
     int pivot = vetor[high];
@@ -89,7 +110,7 @@ double quick_sort(int vetor[], int low, int high){
     
     double tempo = time.count();
     return tempo;
-    
+}   
 void print_time (double time){
     if(time >= 1000 && time < 1000000){
         //micro -> milli
