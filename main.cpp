@@ -4,6 +4,22 @@
 using namespace std;
 using namespace std::chrono;
 
+double bubble_sort(int size, int vetor[]){
+
+    auto start = steady_clock::now();
+
+    for(int i = 0; i < size; i++)
+        for(int j = 0; j < size - i; j++)
+            if(vetor[j] > vetor[j + 1])
+                swap(vetor[j], vetor[j + 1]);
+
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+
+    double tempo = time.count();
+    return tempo;
+}
+
 double insertion_sort(int size, int vetor[]) {
 
     auto start = steady_clock::now();
