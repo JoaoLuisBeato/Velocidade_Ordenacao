@@ -9,6 +9,7 @@ void fill_array(int size, int vetor[]){
 
     for(int i = 0; i < size; i++)
         vetor[i] = 20 + (rand() % 1999981);
+}
 
 double bubble_sort(int size, int vetor[]){
 
@@ -54,18 +55,21 @@ double normal_search(int vetor[], int size, int num_search){
     int check = 0;
     auto start = steady_clock::now();
         
-        for(int i = 0; i < size; i++){
-            if(vetor[i] == num_search){
-                check = 1;
-            }
+    for(int i = 0; i < size; i++){
+        if(vetor[i] == num_search){
+            check = 1;
         }
+    }
 
-        if(check == 1){
-            cout << "\n\nO numero buscado existe" << endl;
-        }else{
-            cout << "\n\nO numero buscado nao existe" << endl;
-        }
-        //cout << "\n\n==========================\n";
+    if(check == 1){
+        cout << "\n\nO numero buscado existe" << endl;
+    }else{
+        cout << "\n\nO numero buscado nao existe" << endl;
+    }
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+    double tempo = time.count();
+    return tempo;
 }
 double binarySearch(int arr[], int x, int l, int r) {
     //- comeca
