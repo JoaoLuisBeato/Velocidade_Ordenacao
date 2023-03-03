@@ -4,6 +4,12 @@
 using namespace std;
 using namespace std::chrono;
 
+void fill_array(int size, int vetor[]){
+
+    for(int i = 0; i < size; i++)
+        vetor[i] = 20 + (rand() % 1999981);
+}
+
 double insertion_sort(int size, int vetor[]) {
 
     auto start = steady_clock::now();
