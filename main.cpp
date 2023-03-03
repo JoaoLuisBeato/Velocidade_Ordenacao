@@ -148,8 +148,67 @@ int Message(){
 }
 
 int main(){
+    
+    int size, opcao, num_search;
+    double tempo;
 
-    cout << "Hello, world!" << endl;
+    cout << "Digite o tamanho do array: ";
+    cin >> size;
+    
+    int* array = new int[size];
+    for (int i=0; i<size; i++)
+        array[i] = 0;
+    
+    do{
+        opcao = Message();
+        switch (opcao){
+            case 1:
+                tempo = bubble_sort(size, array);
+                print_array(size, array);
+                cout << "\n\nTempo micro: " << tempo << endl;
+                print_time(tempo);
+                break;
 
+            case 2:
+                tempo = insertion_sort(size, array);
+                print_array(size, array);
+                print_time(tempo);
+                break;
+
+            case 3:
+                tempo = quick_sort(array, 0, size - 1);
+                print_array(size, array);
+                print_time(tempo);
+                break;
+
+            case 4: //Binary Search
+                cout << "\n\n==========================\n";
+                cout << "Qual numero deseja procurar?: ";
+                cin >> num_search;
+                tempo = binarySearch(array, num_search, 0, size-1);
+                print_time(tempo);
+                break;
+
+            case 5: //Normal search
+                cout << "\n\n==========================\n";
+                cout << "Qual numero deseja procurar?: ";
+                cin >> num_search;
+                tempo = normal_search(array, size-1, num_search);
+                print_time(tempo);
+                break;
+                
+            case 6:
+                fill_array(size, array);
+                print_array(size, array);
+                break;
+                
+            case 0:
+                break;
+                
+            default:
+                break;
+        }
+            
+    }while(opcao != 0);
     return 0;
 }
