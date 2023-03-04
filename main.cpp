@@ -6,17 +6,6 @@ using namespace std;
 using namespace std::chrono;
 
 
-
-
-
-
-
-
-
-
-
-
-
 double bubble_sort(int size, int vetor[]){
 
     auto start = steady_clock::now();
@@ -270,6 +259,5 @@ int main(){
         cout << "\n\n";
 
     }while(opcao == 1);
-    
     return 0;
 }
