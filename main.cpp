@@ -1,15 +1,21 @@
 #include <iostream>
 #include <chrono>
+#include <random>
 
 using namespace std;
 using namespace std::chrono;
 
 
-void fill_array(int size, int vetor[]){
 
-    for(int i = 0; i < size; i++)
-        vetor[i] = 20 + (rand() % 1999981);
-}
+
+
+
+
+
+
+
+
+
 
 double bubble_sort(int size, int vetor[]){
 
@@ -50,59 +56,6 @@ double insertion_sort(int size, int vetor[]) {
     return tempo;
 }
 
-double normal_search(int vetor[], int size, int num_search){ 
-    
-    int check = 0;
-    auto start = steady_clock::now();
-        
-    for(int i = 0; i < size; i++){
-        if(vetor[i] == num_search){
-            check = 1;
-        }
-    }
-
-    if(check == 1){
-        cout << "\n\nO numero buscado existe" << endl;
-    }else{
-        cout << "\n\nO numero buscado nao existe" << endl;
-    }
-    auto end = steady_clock::now();
-    duration<double, std::micro> time = end - start;
-    double tempo = time.count();
-    return tempo;
-}
-double binarySearch(int arr[], int x, int l, int r) {
-    //- comeca
-    auto start = steady_clock::now();
-    while (l <= r) {
-        
-        int m = l + (r - l) / 2;
- 
-        if (arr[m] == x){
-            // --> acha termina de contar
-            cout << "\n\nO numero buscado existe" << endl;
-            auto end = steady_clock::now();
-            duration<double, std::micro> time = end - start;
-            double tempo = time.count();
-            return tempo;
-        }
- 
-        if (arr[m] < x){
-            l = m + 1;
-        }
-
-        else{
-            r = m - 1;
-        }
-    }
-    cout << "\n\nO numero buscado nao existe" << endl;
-
-
-    auto end = steady_clock::now();
-    duration<double, std::micro> time = end - start;
-    double tempo = time.count();
-    return tempo;
-}
 int split(int vetor[], int low, int high){
 
     int pivot = vetor[high];
@@ -137,23 +90,61 @@ double quick_sort(int vetor[], int low, int high){
     
     double tempo = time.count();
     return tempo;
-}   
-void print_time (double time){
-    if(time >= 1000 && time < 1000000){
-        //micro -> milli
-        time = time/1000.0; // ->milli
-        cout << "\n\nTempo percorrido: " << time << " milisegundos";
-    }
-    else if(time >= 1000000){
-        //micro -> seconds
-        time = time/1000000.0; //-> seconds
-        cout << "\n\nTempo percorrido: " << time << " segundos";
+}
 
-    }
-    else{
-        cout << "\n\nTempo percorrido: " << time << " microsegundos";
-    }
+double normal_search(int vetor[], int size, int num_search){ 
     
+    int check = 0;
+    auto start = steady_clock::now();
+        
+    for(int i = 0; i < size; i++){
+        if(vetor[i] == num_search){
+            check = 1;
+        }
+    }
+
+    if(check == 1){
+        cout << "\n\nO numero buscado existe" << endl;
+    }else{
+        cout << "\n\nO numero buscado nao existe" << endl;
+    }
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+    double tempo = time.count();
+    return tempo;
+}
+
+double binarySearch(int arr[], int x, int l, int r) {
+    //- comeca
+    auto start = steady_clock::now();
+    while (l <= r) {
+        
+        int m = l + (r - l) / 2;
+ 
+        if (arr[m] == x){
+            // --> acha termina de contar
+            cout << "\n\nO numero buscado existe" << endl;
+            auto end = steady_clock::now();
+            duration<double, std::micro> time = end - start;
+            double tempo = time.count();
+            return tempo;
+        }
+ 
+        if (arr[m] < x){
+            l = m + 1;
+        }
+
+        else{
+            r = m - 1;
+        }
+    }
+    cout << "\n\nO numero buscado nao existe" << endl;
+
+
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+    double tempo = time.count();
+    return tempo;
 }
 
 int Message(){
@@ -180,68 +171,105 @@ void print_array(int size, int vetor[]){
     }
 }
 
+void print_time (double time){
+    if(time >= 1000 && time < 1000000){
+        //micro -> milli
+        time = time/1000.0; // ->milli
+        cout << "\n\nTempo percorrido: " << time << " milisegundos";
+    }
+    else if(time >= 1000000){
+        //micro -> seconds
+        time = time/1000000.0; //-> seconds
+        cout << "\n\nTempo percorrido: " << time << " segundos";
+
+    }
+    else{
+        cout << "\n\nTempo percorrido: " << time << " microsegundos";
+    }
+}
+
+void fill_array(int size, int vetor[]){
+
+    random_device random;
+    default_random_engine engine {random()};
+    uniform_int_distribution<> dist{20, 2000001};
+
+
+    for(int i = 0; i < size; i++)
+        vetor[i] = dist(engine);
+}
+
 int main(){
     
     int size, opcao, num_search;
     double tempo;
 
-    cout << "Digite o tamanho do array: ";
-    cin >> size;
-    
-    int* array = new int[size];
-    for (int i=0; i<size; i++)
-        array[i] = 0;
-    
     do{
-        opcao = Message();
-        switch (opcao){
-            case 1:
-                tempo = bubble_sort(size, array);
-                print_array(size, array);
-                cout << "\n\nTempo micro: " << tempo << endl;
-                print_time(tempo);
-                break;
+        cout << "Digite o tamanho do array: ";
+        cin >> size;
 
-            case 2:
-                tempo = insertion_sort(size, array);
-                print_array(size, array);
-                print_time(tempo);
-                break;
+        int* array = new int[size];
+        for (int i=0; i<size; i++)
+        array[i] = 0;
 
-            case 3:
-                tempo = quick_sort(array, 0, size - 1);
-                print_array(size, array);
-                print_time(tempo);
-                break;
+        do{
+            opcao = Message();
+            switch (opcao){
+                case 1:
+                    tempo = bubble_sort(size, array);
+                    print_array(size, array);
+                    print_time(tempo);
+                    break;
 
-            case 4: //Binary Search
-                cout << "\n\n==========================\n";
-                cout << "Qual numero deseja procurar?: ";
-                cin >> num_search;
-                tempo = binarySearch(array, num_search, 0, size-1);
-                print_time(tempo);
-                break;
+                case 2:
+                    tempo = insertion_sort(size, array);
+                    print_array(size, array);
+                    print_time(tempo);
+                    break;
 
-            case 5: //Normal search
-                cout << "\n\n==========================\n";
-                cout << "Qual numero deseja procurar?: ";
-                cin >> num_search;
-                tempo = normal_search(array, size-1, num_search);
-                print_time(tempo);
-                break;
-                
-            case 6:
-                fill_array(size, array);
-                print_array(size, array);
-                break;
-                
-            case 0:
-                break;
-                
-            default:
-                break;
-        }
-            
-    }while(opcao != 0);
+                case 3:
+                    tempo = quick_sort(array, 0, size - 1);
+                    print_array(size, array);
+                    print_time(tempo);
+                    break;
+
+                case 4: //Binary Search
+                    cout << "\n\n==========================\n";
+                    cout << "Qual numero deseja procurar?: ";
+                    cin >> num_search;
+                    tempo = binarySearch(array, num_search, 0, size-1);
+                    print_time(tempo);
+                    break;
+
+                case 5: //Normal search
+                    cout << "\n\n==========================\n";
+                    cout << "Qual numero deseja procurar?: ";
+                    cin >> num_search;
+                    tempo = normal_search(array, size, num_search);
+                    print_time(tempo);
+                    break;
+                    
+                case 6:
+                    fill_array(size, array);
+                    print_array(size, array);
+                    break;
+                    
+                case 0:
+                    break;
+                    
+                default:
+                    break;
+            }
+        }while(opcao != 0);
+
+        delete[] array; 
+        cout << "\n 1. Deseja criar um novo array" << endl;
+        cout << " 0. Encerrar programa" <<endl;
+        cout << "--> ";
+        cin >> opcao;
+        cout << "\n\n";
+
+    }while(opcao == 1);
+    
     return 0;
 }
