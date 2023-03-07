@@ -190,7 +190,7 @@ void fill_array(int size, int vetor[]){
 
 int main(){
     
-    int size, opcao, num_search;
+    int size, opcao, num_search, Max_print = 100000;
     double tempo;
 
     do{
@@ -206,19 +206,22 @@ int main(){
             switch (opcao){
                 case 1:
                     tempo = bubble_sort(size, array);
-                    print_array(size, array);
+                    if(size <= Max_print)
+                        print_array(size, array);
                     print_time(tempo);
                     break;
 
                 case 2:
                     tempo = insertion_sort(size, array);
-                    print_array(size, array);
+                    if(size <= Max_print)
+                        print_array(size, array);
                     print_time(tempo);
                     break;
 
                 case 3:
                     tempo = quick_sort(array, 0, size - 1);
-                    print_array(size, array);
+                    if(size <= Max_print)
+                        print_array(size, array);
                     print_time(tempo);
                     break;
 
@@ -240,10 +243,8 @@ int main(){
                     
                 case 6:
                     fill_array(size, array);
-                    print_array(size, array);
-                    break;
-                    
-                case 0:
+                    if(size <= Max_print)
+                        print_array(size, array);
                     break;
                     
                 default:
