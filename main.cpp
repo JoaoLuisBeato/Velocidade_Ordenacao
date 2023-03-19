@@ -6,6 +6,11 @@
 using namespace std;
 using namespace std::chrono;
 
+typedef struct modulo {
+   string sort;
+   int size;
+   double tempo_execucao;
+}modulo;
 
 double bubble_sort(int size, int vetor[]){
 
@@ -228,9 +233,6 @@ cout << "\n\nENTRANDO NO PRINT TABLE \n\n";
                 else{
                     cout << " Tempo percorrido: " << time << " microsegundos";
                 }
-            
-
-        
             }
     }
 
@@ -238,8 +240,9 @@ cout << "\n\nENTRANDO NO PRINT TABLE \n\n";
 
 int main(){
     
-    int size, opcao, num_search, Max_print = 100000;
+    int size, opcao, num_search, posicao = 0, Max_print = 100000;
     double tempo, arr_print[5][3] = {0};
+    modulo tabela[20];
 
     do{
         cout << "Digite o tamanho do array: ";
@@ -254,9 +257,9 @@ int main(){
             switch (opcao){
                 case 1:
                     tempo = bubble_sort(size, array);
-                    arr_print[0][0] = 1;
-                    arr_print[0][2] = tempo;
-                    arr_print[0][1] = size;
+                    tabela[posicao].size = size;
+                    tabela[posicao].sort = "Bubble Sort";
+                    tabela[posicao].tempo_execucao = tempo;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
@@ -264,9 +267,9 @@ int main(){
 
                 case 2:
                     tempo = insertion_sort(size, array);
-                    arr_print[1][0] = 1;
-                    arr_print[1][2] = tempo;
-                    arr_print[1][1] = size;
+                    tabela[posicao].size = size;
+                    tabela[posicao].sort = "Insert Sort";
+                    tabela[posicao].tempo_execucao = tempo;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
@@ -274,9 +277,9 @@ int main(){
 
                 case 3:
                     tempo = quick_sort(array, 0, size - 1);
-                    arr_print[2][0] = 1;
-                    arr_print[2][2] = tempo;
-                    arr_print[2][1] = size;
+                    tabela[posicao].size = size;
+                    tabela[posicao].sort = "Quick Sort";
+                    tabela[posicao].tempo_execucao = tempo;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
@@ -287,9 +290,9 @@ int main(){
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
                     tempo = binarySearch(array, num_search, 0, size-1);
-                    arr_print[3][0] = 1;
-                    arr_print[3][2] = tempo;
-                    arr_print[3][1] = size;
+                    tabela[posicao].size = size;
+                    tabela[posicao].sort = "Binary Search";
+                    tabela[posicao].tempo_execucao = tempo;
                     print_time(tempo);
                     break;
 
@@ -298,9 +301,9 @@ int main(){
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
                     tempo = normal_search(array, size, num_search);
-                    arr_print[4][0] = 1;
-                    arr_print[4][2] = tempo;
-                    arr_print[4][1] = size;
+                    tabela[posicao].size = size;
+                    tabela[posicao].sort = "Normal search";
+                    tabela[posicao].tempo_execucao = tempo;
                     print_time(tempo);
                     break;
                     
@@ -313,6 +316,8 @@ int main(){
                 default:
                     break;
             }
+            if(posicao<20)
+                posicao++;
         }while(opcao != 0);
 
         delete[] array; 
