@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <random>
+#include <iomanip>
 
 using namespace std;
 using namespace std::chrono;
@@ -188,10 +189,57 @@ void fill_array(int size, int vetor[]){
         vetor[i] = dist(engine);
 }
 
+void print_table(double arr_print[5][3]){
+cout << "\n\nENTRANDO NO PRINT TABLE \n\n";
+    for(int linha = 0; linha < 5; linha++){
+            cout << "\n\n";
+            if(arr_print[linha][0] != 0){
+                double time = arr_print[linha][2];
+                int size = arr_print[linha][1];
+            switch(linha){
+                case 0:
+                    cout <<"Bubble Sort  ";
+                    break;
+                case 1:
+                    cout <<"Insertion Sort  ";
+                    break;
+                case 2:
+                    cout <<"Quick Sort  ";
+                    break;
+                case 3:
+                    cout <<"Binary Search  ";
+                    break;
+                case 4:
+                    cout <<"Normal Search  ";
+                    break;
+                default:
+                    break;
+            }
+                cout << setw(10) << " Size: " << size;
+                if(time >= 1000 && time < 1000000){ //micro -> milli
+                    time = time/1000.0; // ->milli
+                    cout << " Tempo percorrido: " << time << " milisegundos";
+                }
+                else if(time >= 1000000){ //micro -> seconds
+                    time = time/1000000.0; //-> seconds
+                    cout << " Tempo percorrido: " << time << " segundos";
+
+                }
+                else{
+                    cout << " Tempo percorrido: " << time << " microsegundos";
+                }
+            
+
+        
+            }
+    }
+
+}
+
 int main(){
     
     int size, opcao, num_search, Max_print = 100000;
-    double tempo;
+    double tempo, arr_print[5][3] = {0};
 
     do{
         cout << "Digite o tamanho do array: ";
@@ -206,6 +254,9 @@ int main(){
             switch (opcao){
                 case 1:
                     tempo = bubble_sort(size, array);
+                    arr_print[0][0] = 1;
+                    arr_print[0][2] = tempo;
+                    arr_print[0][1] = size;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
@@ -213,6 +264,9 @@ int main(){
 
                 case 2:
                     tempo = insertion_sort(size, array);
+                    arr_print[1][0] = 1;
+                    arr_print[1][2] = tempo;
+                    arr_print[1][1] = size;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
@@ -220,6 +274,9 @@ int main(){
 
                 case 3:
                     tempo = quick_sort(array, 0, size - 1);
+                    arr_print[2][0] = 1;
+                    arr_print[2][2] = tempo;
+                    arr_print[2][1] = size;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
@@ -230,6 +287,9 @@ int main(){
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
                     tempo = binarySearch(array, num_search, 0, size-1);
+                    arr_print[3][0] = 1;
+                    arr_print[3][2] = tempo;
+                    arr_print[3][1] = size;
                     print_time(tempo);
                     break;
 
@@ -238,6 +298,9 @@ int main(){
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
                     tempo = normal_search(array, size, num_search);
+                    arr_print[4][0] = 1;
+                    arr_print[4][2] = tempo;
+                    arr_print[4][1] = size;
                     print_time(tempo);
                     break;
                     
@@ -260,5 +323,6 @@ int main(){
         cout << "\n\n";
 
     }while(opcao == 1);
+    print_table(arr_print);
     return 0;
 }
