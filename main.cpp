@@ -1,13 +1,13 @@
 #include <iostream>
 #include <chrono>
 #include <random>
-#include <iomanip>
+#include <string.h>
 
 using namespace std;
 using namespace std::chrono;
 
 typedef struct modulo {
-   string sort;
+   char sort[20];
    int size;
    double tempo_execucao;
 }modulo;
@@ -170,16 +170,16 @@ void print_time (double time){
     if(time >= 1000 && time < 1000000){
         //micro -> milli
         time = time/1000.0; // ->milli
-        cout << "\n\nTempo percorrido: " << time << " milisegundos";
+        cout << "Tempo percorrido: " << time << " milisegundos";
     }
     else if(time >= 1000000){
         //micro -> seconds
         time = time/1000000.0; //-> seconds
-        cout << "\n\nTempo percorrido: " << time << " segundos";
+        cout << "Tempo percorrido: " << time << " segundos";
 
     }
     else{
-        cout << "\n\nTempo percorrido: " << time << " microsegundos";
+        cout << "Tempo percorrido: " << time << " microsegundos";
     }
 }
 
@@ -194,47 +194,13 @@ void fill_array(int size, int vetor[]){
         vetor[i] = dist(engine);
 }
 
-void print_table(double arr_print[5][3]){
-cout << "\n\nENTRANDO NO PRINT TABLE \n\n";
-    for(int linha = 0; linha < 5; linha++){
-            cout << "\n\n";
-            if(arr_print[linha][0] != 0){
-                double time = arr_print[linha][2];
-                int size = arr_print[linha][1];
-            switch(linha){
-                case 0:
-                    cout <<"Bubble Sort  ";
-                    break;
-                case 1:
-                    cout <<"Insertion Sort  ";
-                    break;
-                case 2:
-                    cout <<"Quick Sort  ";
-                    break;
-                case 3:
-                    cout <<"Binary Search  ";
-                    break;
-                case 4:
-                    cout <<"Normal Search  ";
-                    break;
-                default:
-                    break;
-            }
-                cout << setw(10) << " Size: " << size;
-                if(time >= 1000 && time < 1000000){ //micro -> milli
-                    time = time/1000.0; // ->milli
-                    cout << " Tempo percorrido: " << time << " milisegundos";
-                }
-                else if(time >= 1000000){ //micro -> seconds
-                    time = time/1000000.0; //-> seconds
-                    cout << " Tempo percorrido: " << time << " segundos";
-
-                }
-                else{
-                    cout << " Tempo percorrido: " << time << " microsegundos";
-                }
-            }
+void printar_tabela(modulo sorts[20], int size){
+    for(int i = 0; i < size; i++){
+       cout << "Sort: " << sorts[i].sort << "  Size: " << sorts[i].size << " ";
+       print_time(sorts[i].tempo_execucao);
+       cout << endl;
     }
+    
 }
 
 int main(){
@@ -249,7 +215,7 @@ int main(){
 
         int* array = new int[size];
         for (int i=0; i<size; i++)
-        array[i] = 0;
+            array[i] = 0;
 
         do{
             opcao = Message();
@@ -257,31 +223,39 @@ int main(){
                 case 1:
                     tempo = bubble_sort(size, array);
                     tabela[posicao].size = size;
-                    tabela[posicao].sort = "Bubble Sort";
+                    strcpy(tabela[posicao].sort, "Bubble Sort");
                     tabela[posicao].tempo_execucao = tempo;
                     if(size <= Max_print)
                         print_array(size, array);
+
                     print_time(tempo);
+
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 2:
                     tempo = insertion_sort(size, array);
                     tabela[posicao].size = size;
-                    tabela[posicao].sort = "Insert Sort";
+                    strcpy(tabela[posicao].sort, "Insertion Sort");
                     tabela[posicao].tempo_execucao = tempo;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 3:
                     tempo = quick_sort(array, 0, size - 1);
                     tabela[posicao].size = size;
-                    tabela[posicao].sort = "Quick Sort";
+                    strcpy(tabela[posicao].sort, "Quick Sort");
                     tabela[posicao].tempo_execucao = tempo;
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 4: //Binary Search
@@ -290,9 +264,11 @@ int main(){
                     cin >> num_search;
                     tempo = binarySearch(array, num_search, 0, size-1);
                     tabela[posicao].size = size;
-                    tabela[posicao].sort = "Binary Search";
+                    strcpy(tabela[posicao].sort, "Binary Search");
                     tabela[posicao].tempo_execucao = tempo;
                     print_time(tempo);
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 5: //Normal search
@@ -301,22 +277,24 @@ int main(){
                     cin >> num_search;
                     tempo = normal_search(array, size, num_search);
                     tabela[posicao].size = size;
-                    tabela[posicao].sort = "Normal search";
+                    strcpy(tabela[posicao].sort, "Norma Search");
                     tabela[posicao].tempo_execucao = tempo;
                     print_time(tempo);
+                    if(posicao<20)
+                        posicao++;
                     break;
                     
                 case 6:
                     fill_array(size, array);
                     if(size <= Max_print)
                         print_array(size, array);
+                    
                     break;
                     
                 default:
                     break;
             }
-            if(posicao<20)
-                posicao++;
+            
         }while(opcao != 0);
 
         delete[] array; 
@@ -327,5 +305,6 @@ int main(){
         cout << "\n\n";
 
     }while(opcao == 1);
+    printar_tabela(tabela,posicao);
     return 0;
 }
