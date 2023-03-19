@@ -235,13 +235,12 @@ cout << "\n\nENTRANDO NO PRINT TABLE \n\n";
                 }
             }
     }
-
 }
 
 int main(){
     
     int size, opcao, num_search, posicao = 0, Max_print = 100000;
-    double tempo, arr_print[5][3] = {0};
+    double tempo;
     modulo tabela[20];
 
     do{
@@ -328,6 +327,5 @@ int main(){
         cout << "\n\n";
 
     }while(opcao == 1);
-    print_table(arr_print);
     return 0;
 }
