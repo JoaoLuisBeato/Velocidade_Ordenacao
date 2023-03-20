@@ -204,11 +204,11 @@ void printar_tabela(modulo sorts[20], int size){
        print_time(sorts[i].tempo_execucao);
        cout << endl;
     }
-
 }
 
 int main(){
 
+    // Inicialização de variáveis
     int size, opcao, num_search, posicao = 0, Max_print = 100000;
     double tempo;
     modulo tabela[20];
@@ -217,47 +217,66 @@ int main(){
         cout << "Digite o tamanho do array: ";
         cin >> size;
 
+        //Alocando dinamicante o array que vai ser utilizado com base no tamanho
         int* array = new int[size];
         for (int i=0; i<size; i++)
             array[i] = 0;
 
+        //Realiza a escolha entre da opções de algoritmos oferecidos
         do{
             opcao = Message();
             switch (opcao){
                 case 1:
                     tempo = bubble_sort(size, array);
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tabela[posicao].size = size;
                     strcpy(tabela[posicao].sort, "Bubble Sort");
                     tabela[posicao].tempo_execucao = tempo;
+                    
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
 
                     print_time(tempo);
 
+                    //Limite de posição da tabela, não ultrapassa a posição 20
                     if(posicao<20)
                         posicao++;
                     break;
 
                 case 2:
                     tempo = insertion_sort(size, array);
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tabela[posicao].size = size;
                     strcpy(tabela[posicao].sort, "Insertion Sort");
                     tabela[posicao].tempo_execucao = tempo;
+
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
                     if(posicao<20)
                         posicao++;
                     break;
 
                 case 3:
                     tempo = quick_sort(array, 0, size - 1);
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tabela[posicao].size = size;
                     strcpy(tabela[posicao].sort, "Quick Sort");
                     tabela[posicao].tempo_execucao = tempo;
+
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
                     if(posicao<20)
                         posicao++;
                     break;
@@ -266,10 +285,14 @@ int main(){
                     cout << "\n\n==========================\n";
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tempo = binarySearch(array, num_search, 0, size-1);
                     tabela[posicao].size = size;
                     strcpy(tabela[posicao].sort, "Binary Search");
                     tabela[posicao].tempo_execucao = tempo;
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
                     print_time(tempo);
                     if(posicao<20)
                         posicao++;
@@ -279,20 +302,26 @@ int main(){
                     cout << "\n\n==========================\n";
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tempo = normal_search(array, size, num_search);
                     tabela[posicao].size = size;
                     strcpy(tabela[posicao].sort, "Norma Search");
                     tabela[posicao].tempo_execucao = tempo;
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
                     if(posicao<20)
                         posicao++;
                     break;
 
                 case 6:
+                    //Completa o array de inteiros com numeros aleatorios
                     fill_array(size, array);
+
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
-
                     break;
 
                 default:
@@ -300,7 +329,8 @@ int main(){
             }
 
         }while(opcao != 0);
-
+        
+        //Desaloca o array alocado dinamicanete 
         delete[] array;
         cout << "\n 1. Deseja criar um novo array" << endl;
         cout << " 0. Encerrar programa" <<endl;
@@ -308,7 +338,9 @@ int main(){
         cin >> opcao;
         cout << "\n\n";
 
-    }while(opcao == 1);
+    }while(opcao == 1); //Sai do programa apenas quando for diferente de 1
+
+    //Realiza a impressao final da tabela com os resultados obtidos
     cout << "=========================================================================================================\n";
     printar_tabela(tabela,posicao);
     cout << "=========================================================================================================\n";
