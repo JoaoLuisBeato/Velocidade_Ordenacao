@@ -6,11 +6,15 @@
 using namespace std;
 using namespace std::chrono;
 
+// Modulo com os principais atributos para completar a tabela.
+
 typedef struct modulo {
    char sort[20];
    int size;
    double tempo_execucao;
 }modulo;
+
+// a funçao bubble_sort ela é um dos metodos de ordenaçao, sua principal funçao é o swap, a complexidade dele é n ao quadrado.
 
 double bubble_sort(int size, int vetor[]){
 
@@ -28,6 +32,9 @@ double bubble_sort(int size, int vetor[]){
     return tempo;
 
 }
+
+// o insertion_sort é o segundo metodo de oredenaçao do programa, ele funciona fazendo comparaçoes com o anterior para ordenar o array, 
+//tambem tem a complexidade de n ao quadrado.
 
 double insertion_sort(int size, int vetor[]) {
 
@@ -51,6 +58,8 @@ double insertion_sort(int size, int vetor[]) {
     return tempo;
 }
 
+// funçao complementar do quick_sort ela divide o vetor ao meio.
+
 int split(int vetor[], int low, int high){
 
     int pivot = vetor[high];
@@ -66,6 +75,9 @@ int split(int vetor[], int low, int high){
     swap(vetor[i + 1], vetor[high]);
     return (i + 1);
 }
+
+// funcao quick_sort é a terceira ordenaçao, ele usa a funçao split para escolher o pivot e a esquerda dele estao os numeros menor que
+// o pivot e a direita estao os maiores, fazendo isso ate o arry estar ordenado, sua complexidade é log(n).
 
 double quick_sort(int vetor[], int low, int high){
 
@@ -86,6 +98,9 @@ double quick_sort(int vetor[], int low, int high){
     double tempo = time.count();
     return tempo;
 }
+
+// a funçao normal_search é a primeira busca do programa, ela é uma busca linear, anda o array inteiro ate achar o numero desejado, 
+//a complexidade é n.
 
 double normal_search(int vetor[], int size, int num_search){
 
@@ -108,6 +123,9 @@ double normal_search(int vetor[], int size, int num_search){
     double tempo = time.count();
     return tempo;
 }
+
+// a funçao binarySearch é a segunda busca do programa e a mais efeciente, ela realiza busca por divisoes sucessivas do array,
+//a complexidade é Log (n).
 
 double binarySearch(int arr[], int x, int l, int r) {
     //- comeca
@@ -142,6 +160,8 @@ double binarySearch(int arr[], int x, int l, int r) {
     return tempo;
 }
 
+// funçao que retorna o print do menu do programa.
+
 int Message(){
     int opcao = 0;
     cout << "\n\n==========================\n";
@@ -160,6 +180,8 @@ int Message(){
 
 }
 
+// funçao que imprimi o array com todos os numeros random.
+
 void print_array(int size, int vetor[]){
 
     cout << "\n\n" << endl;
@@ -169,6 +191,8 @@ void print_array(int size, int vetor[]){
     }
     cout << "\n" << endl;
 }
+
+// funçao que imprimi o tempo que demorou a execuçao, dependendo do tempo ele imprimi em milisegundos, segundos ou microsegundo.
 
 void print_time (double time){
     if(time >= 1000 && time < 1000000){
@@ -187,6 +211,8 @@ void print_time (double time){
     }
 }
 
+// funçao que cria os numeros random dependendo do tamanho que o usuario pedir.
+
 void fill_array(int size, int vetor[]){
 
     random_device random;
@@ -197,6 +223,8 @@ void fill_array(int size, int vetor[]){
     for(int i = 0; i < size; i++)
         vetor[i] = dist(engine);
 }
+
+// imprimi a tabela de acordo com as funçoes executadas.
 
 void printar_tabela(modulo sorts[20], int size){
     for(int i = 0; i < size; i++){
