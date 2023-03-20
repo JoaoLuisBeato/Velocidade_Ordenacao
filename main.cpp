@@ -36,7 +36,7 @@ double insertion_sort(int size, int vetor[]) {
     for (int i = 1; i < size; i++) {
         int escolhido = vetor[i];
         int j = i - 1;
-        
+
         while ((j >= 0) && (vetor[j] > escolhido)) {
             vetor[j + 1] = vetor[j];
             j--;
@@ -46,7 +46,7 @@ double insertion_sort(int size, int vetor[]) {
 
     auto end = steady_clock::now();
     duration<double, std::micro> time = end - start;
-    
+
     double tempo = time.count();
     return tempo;
 }
@@ -61,7 +61,7 @@ int split(int vetor[], int low, int high){
             i++;
             swap(vetor[i], vetor[j]);
         }
-    } 
+    }
 
     swap(vetor[i + 1], vetor[high]);
     return (i + 1);
@@ -74,24 +74,24 @@ double quick_sort(int vetor[], int low, int high){
     if(low < high){
 
         int half = split(vetor, low, high);
-        
+
         quick_sort(vetor, low, half - 1);
         quick_sort(vetor, half + 1, high);
-        
+
     }
 
     auto end = steady_clock::now();
     duration<double, std::micro> time = end - start;
-    
+
     double tempo = time.count();
     return tempo;
 }
 
-double normal_search(int vetor[], int size, int num_search){ 
-    
+double normal_search(int vetor[], int size, int num_search){
+
     int check = 0;
     auto start = steady_clock::now();
-        
+
     for(int i = 0; i < size; i++){
         if(vetor[i] == num_search){
             check = 1;
@@ -113,9 +113,9 @@ double binarySearch(int arr[], int x, int l, int r) {
     //- comeca
     auto start = steady_clock::now();
     while (l <= r) {
-        
+
         int m = l + (r - l) / 2;
- 
+
         if (arr[m] == x){
             // --> acha termina de contar
             cout << "\n\nO numero buscado existe" << endl;
@@ -124,7 +124,7 @@ double binarySearch(int arr[], int x, int l, int r) {
             double tempo = time.count();
             return tempo;
         }
- 
+
         if (arr[m] < x){
             l = m + 1;
         }
@@ -161,25 +161,29 @@ int Message(){
 }
 
 void print_array(int size, int vetor[]){
+
+    cout << "\n\n" << endl;
+
     for(int i = 0; i < size; i++){
         cout << vetor[i] << " ";
     }
+    cout << "\n" << endl;
 }
 
 void print_time (double time){
     if(time >= 1000 && time < 1000000){
         //micro -> milli
         time = time/1000.0; // ->milli
-        cout << "Tempo percorrido: " << time << " milisegundos";
+        cout << "|\tTempo percorrido: " << time << " milisegundos\t|";
     }
     else if(time >= 1000000){
         //micro -> seconds
         time = time/1000000.0; //-> seconds
-        cout << "Tempo percorrido: " << time << " segundos";
+        cout << "|\tTempo percorrido: " << time << " segundos\t|";
 
     }
     else{
-        cout << "Tempo percorrido: " << time << " microsegundos";
+        cout << "|\tTempo percorrido: " << time << " microsegundos\t|";
     }
 }
 
@@ -196,15 +200,15 @@ void fill_array(int size, int vetor[]){
 
 void printar_tabela(modulo sorts[20], int size){
     for(int i = 0; i < size; i++){
-       cout << "Sort: " << sorts[i].sort << "  Size: " << sorts[i].size << " ";
+       cout << "|\tSort: " << sorts[i].sort << "\t|\tSize: " << sorts[i].size << "\t";
        print_time(sorts[i].tempo_execucao);
        cout << endl;
     }
-    
+
 }
 
 int main(){
-    
+
     int size, opcao, num_search, posicao = 0, Max_print = 100000;
     double tempo;
     modulo tabela[20];
@@ -283,21 +287,21 @@ int main(){
                     if(posicao<20)
                         posicao++;
                     break;
-                    
+
                 case 6:
                     fill_array(size, array);
                     if(size <= Max_print)
                         print_array(size, array);
-                    
+
                     break;
-                    
+
                 default:
                     break;
             }
-            
+
         }while(opcao != 0);
 
-        delete[] array; 
+        delete[] array;
         cout << "\n 1. Deseja criar um novo array" << endl;
         cout << " 0. Encerrar programa" <<endl;
         cout << "--> ";
@@ -305,6 +309,8 @@ int main(){
         cout << "\n\n";
 
     }while(opcao == 1);
+    cout << "=========================================================================================================\n";
     printar_tabela(tabela,posicao);
+    cout << "=========================================================================================================\n";
     return 0;
 }
