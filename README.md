@@ -13,7 +13,7 @@ Yuka Sakai.
 
 ## Como excutar o código
 
-A execução do código tem como pré-requisito o software Docker. A partir dele, deve-se baixar a pasta do projeto, descompacta-la. Após isso, abra o Terminal ou PowerShell e navegue até onde está a pasta do projeto.
+A execução do código tem como pré-requisito o software Docker. A partir dele, deve-se baixar a pasta do projeto e descompacta-la. Após isso, abra o Terminal ou PowerShell e navegue até onde está a pasta do projeto.
 Agora dentro do terminal digite os seguintes comandos:
 
     -> docker build . -t nome_escolhido:<versão> (recomendável 1.0)
