@@ -34,13 +34,13 @@ Primeiramente, o software requisita ao usuário um números entre 10.000 e 1.000
 
 Após essa etapa, tem-se ao usuário a escolha das seguintes opções
 
-* 1. Bubble Sort
-* 2. Insertion Sort
-* 3. Quick Sort
-* 4. Binery Search
-* 5. Normal Search
-* 6. Fill Array
-* 0. Inserir um array novo
+* 1 Bubble Sort
+* 2 Insertion Sort
+* 3 Quick Sort
+* 4 Binery Search
+* 5 Normal Search
+* 6 Fill Array
+* 0 Inserir um array novo
 
 Sendo a opção 1, 2 e 3 algoritmos de ordenação de números inteiros, 4 e 5 algoritmos de busca (na qual a primeira necessita do vetor ordenado e a segunda não), um algaritmo de preenchimento na 6 e o 0 para uma opção de inserir um array novo.
 
