@@ -5,7 +5,7 @@ André Luís Bianchini Filho,
 João Luís Beato Cardoso,
 Mateus José Whitaker Filipe,
 Rafael Rodrigues Sato,
-Yuka Sakai,
+Yuka Sakai.
 
     Terceira Tarefa - Velocidade para ordenação e busca!
 
