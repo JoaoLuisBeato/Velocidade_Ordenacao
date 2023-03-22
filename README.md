@@ -1,11 +1,11 @@
 # Velocidade_Ordenacao
 
 - Projeto organizado pelo:
-André Luís Bianchini Filho;
-João Luís Beato Cardoso;
-Mateus José Whitaker Filipe;
-Rafael Rodrigues Sato;
-Yuka Sakai;
+André Luís Bianchini Filho,
+João Luís Beato Cardoso,
+Mateus José Whitaker Filipe,
+Rafael Rodrigues Sato,
+Yuka Sakai,
 
     Terceira Tarefa - Velocidade para ordenação e busca!
 
