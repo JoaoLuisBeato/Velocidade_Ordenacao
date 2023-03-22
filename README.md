@@ -17,10 +17,10 @@ A execução do código tem como pré-requisito o software Docker. A partir dele
 Agora dentro do terminal digite os seguintes comandos:
 
     -> docker build . -t nome_escolhido:<versão> (recomendável 1.0)
-        Ex: docker build . -t Ordenacao:1.1
+        Ex: docker build . -t ordenacao:1.1
         
     -> docker run --rm -it nome_escolhido:<versão>
-        Ex: docker run --rm -it Ordenacao:1.1
+        Ex: docker run --rm -it ordenacao:1.1
 
 
 
