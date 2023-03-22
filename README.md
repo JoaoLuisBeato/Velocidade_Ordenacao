@@ -14,11 +14,11 @@ Yuka Sakai;
 A execução do código tem como pré-requisito o software Docker. A partir dele, deve-se baixar a pasta do projeto, descompacta-la. Após isso, abra o Terminal ou PowerShell e navegue até onde está a pasta do projeto.
 Agora dentro do terminal digite os seguintes comandos:
 
-    - docker build . -t nome_escolhido:<versão> (recomendável 1.0)
-    Ex: docker build . -t Ordenacao:1.1
+    -> docker build . -t nome_escolhido:<versão> (recomendável 1.0)
+        Ex: docker build . -t Ordenacao:1.1
         
-    - docker run --rm -it nome_escolhido:<versão>
-    Ex: docker run --rm -it Ordenacao:1.1
+    -> docker run --rm -it nome_escolhido:<versão>
+        Ex: docker run --rm -it Ordenacao:1.1
 
 
 Tendo como objetivo a potencialização e estímulo do uso de uma ferramenta de controle de versões e entregas (github ou gitlab), realizamos um projeto em equipe que consiste na construção de um código que *ordena um vetor de números, busca e calcula o seu tempo de execução para comparação*.
