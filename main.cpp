@@ -1,10 +1,20 @@
 #include <iostream>
 #include <chrono>
 #include <random>
+#include <string.h>
 
 using namespace std;
 using namespace std::chrono;
 
+// Modulo com os principais atributos para completar a tabela.
+
+typedef struct modulo {
+   char sort[20];
+   int size;
+   double tempo_execucao;
+}modulo;
+
+// a funçao bubble_sort ela é um dos metodos de ordenaçao, sua principal funçao é o swap, a complexidade dele é n ao quadrado.
 
 double bubble_sort(int size, int vetor[]){
 
@@ -23,6 +33,9 @@ double bubble_sort(int size, int vetor[]){
 
 }
 
+// o insertion_sort é o segundo metodo de oredenaçao do programa, ele funciona fazendo comparaçoes com o anterior para ordenar o array, 
+//tambem tem a complexidade de n ao quadrado.
+
 double insertion_sort(int size, int vetor[]) {
 
     auto start = steady_clock::now();
@@ -30,7 +43,7 @@ double insertion_sort(int size, int vetor[]) {
     for (int i = 1; i < size; i++) {
         int escolhido = vetor[i];
         int j = i - 1;
-        
+
         while ((j >= 0) && (vetor[j] > escolhido)) {
             vetor[j + 1] = vetor[j];
             j--;
@@ -40,10 +53,12 @@ double insertion_sort(int size, int vetor[]) {
 
     auto end = steady_clock::now();
     duration<double, std::micro> time = end - start;
-    
+
     double tempo = time.count();
     return tempo;
 }
+
+// funçao complementar do quick_sort ela divide o vetor ao meio.
 
 int split(int vetor[], int low, int high){
 
@@ -55,11 +70,14 @@ int split(int vetor[], int low, int high){
             i++;
             swap(vetor[i], vetor[j]);
         }
-    } 
+    }
 
     swap(vetor[i + 1], vetor[high]);
     return (i + 1);
 }
+
+// funcao quick_sort é a terceira ordenaçao, ele usa a funçao split para escolher o pivot e a esquerda dele estao os numeros menor que
+// o pivot e a direita estao os maiores, fazendo isso ate o arry estar ordenado, sua complexidade é log(n).
 
 double quick_sort(int vetor[], int low, int high){
 
@@ -68,24 +86,27 @@ double quick_sort(int vetor[], int low, int high){
     if(low < high){
 
         int half = split(vetor, low, high);
-        
+
         quick_sort(vetor, low, half - 1);
         quick_sort(vetor, half + 1, high);
-        
+
     }
 
     auto end = steady_clock::now();
     duration<double, std::micro> time = end - start;
-    
+
     double tempo = time.count();
     return tempo;
 }
 
-double normal_search(int vetor[], int size, int num_search){ 
-    
+// a funçao normal_search é a primeira busca do programa, ela é uma busca linear, anda o array inteiro ate achar o numero desejado, 
+//a complexidade é n.
+
+double normal_search(int vetor[], int size, int num_search){
+
     int check = 0;
     auto start = steady_clock::now();
-        
+
     for(int i = 0; i < size; i++){
         if(vetor[i] == num_search){
             check = 1;
@@ -103,13 +124,16 @@ double normal_search(int vetor[], int size, int num_search){
     return tempo;
 }
 
+// a funçao binarySearch é a segunda busca do programa e a mais efeciente, ela realiza busca por divisoes sucessivas do array,
+//a complexidade é Log (n).
+
 double binarySearch(int arr[], int x, int l, int r) {
     //- comeca
     auto start = steady_clock::now();
     while (l <= r) {
-        
+
         int m = l + (r - l) / 2;
- 
+
         if (arr[m] == x){
             // --> acha termina de contar
             cout << "\n\nO numero buscado existe" << endl;
@@ -118,7 +142,7 @@ double binarySearch(int arr[], int x, int l, int r) {
             double tempo = time.count();
             return tempo;
         }
- 
+
         if (arr[m] < x){
             l = m + 1;
         }
@@ -135,6 +159,8 @@ double binarySearch(int arr[], int x, int l, int r) {
     double tempo = time.count();
     return tempo;
 }
+
+// funçao que retorna o print do menu do programa.
 
 int Message(){
     int opcao = 0;
@@ -154,28 +180,38 @@ int Message(){
 
 }
 
+// funçao que imprimi o array com todos os numeros random.
+
 void print_array(int size, int vetor[]){
+
+    cout << "\n\n" << endl;
+
     for(int i = 0; i < size; i++){
         cout << vetor[i] << " ";
     }
+    cout << "\n" << endl;
 }
+
+// funçao que imprimi o tempo que demorou a execuçao, dependendo do tempo ele imprimi em milisegundos, segundos ou microsegundo.
 
 void print_time (double time){
     if(time >= 1000 && time < 1000000){
         //micro -> milli
         time = time/1000.0; // ->milli
-        cout << "\n\nTempo percorrido: " << time << " milisegundos";
+        cout << "|\tTempo percorrido: " << time << " milisegundos\t|";
     }
     else if(time >= 1000000){
         //micro -> seconds
         time = time/1000000.0; //-> seconds
-        cout << "\n\nTempo percorrido: " << time << " segundos";
+        cout << "|\tTempo percorrido: " << time << " segundos\t|";
 
     }
     else{
-        cout << "\n\nTempo percorrido: " << time << " microsegundos";
+        cout << "|\tTempo percorrido: " << time << " microsegundos\t|";
     }
 }
+
+// funçao que cria os numeros random dependendo do tamanho que o usuario pedir.
 
 void fill_array(int size, int vetor[]){
 
@@ -188,77 +224,153 @@ void fill_array(int size, int vetor[]){
         vetor[i] = dist(engine);
 }
 
+// imprimi a tabela de acordo com as funçoes executadas.
+
+void printar_tabela(modulo sorts[20], int size){
+    for(int i = 0; i < size; i++){
+       cout << "|\tSort: " << sorts[i].sort << "\t|\tSize: " << sorts[i].size << "\t";
+       print_time(sorts[i].tempo_execucao);
+       cout << endl;
+    }
+}
+
 int main(){
-    
-    int size, opcao, num_search, Max_print = 100000;
+
+    // Inicialização de variáveis
+    int size, opcao, num_search, posicao = 0, Max_print = 100000;
     double tempo;
+    modulo tabela[20];
 
     do{
         cout << "Digite o tamanho do array: ";
         cin >> size;
 
+        //Alocando dinamicante o array que vai ser utilizado com base no tamanho
         int* array = new int[size];
         for (int i=0; i<size; i++)
-        array[i] = 0;
+            array[i] = 0;
 
+        //Realiza a escolha entre da opções de algoritmos oferecidos
         do{
             opcao = Message();
             switch (opcao){
                 case 1:
                     tempo = bubble_sort(size, array);
+
+                    //Armazena os resultados na struct, para imprimir a tabela
+                    tabela[posicao].size = size;
+                    strcpy(tabela[posicao].sort, "Bubble Sort");
+                    tabela[posicao].tempo_execucao = tempo;
+                    
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
+
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 2:
                     tempo = insertion_sort(size, array);
+
+                    //Armazena os resultados na struct, para imprimir a tabela
+                    tabela[posicao].size = size;
+                    strcpy(tabela[posicao].sort, "Insertion Sort");
+                    tabela[posicao].tempo_execucao = tempo;
+
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 3:
                     tempo = quick_sort(array, 0, size - 1);
+
+                    //Armazena os resultados na struct, para imprimir a tabela
+                    tabela[posicao].size = size;
+                    strcpy(tabela[posicao].sort, "Quick Sort");
+                    tabela[posicao].tempo_execucao = tempo;
+
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 4: //Binary Search
                     cout << "\n\n==========================\n";
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tempo = binarySearch(array, num_search, 0, size-1);
+                    tabela[posicao].size = size;
+                    strcpy(tabela[posicao].sort, "Binary Search");
+                    tabela[posicao].tempo_execucao = tempo;
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
                     print_time(tempo);
+                    if(posicao<20)
+                        posicao++;
                     break;
 
                 case 5: //Normal search
                     cout << "\n\n==========================\n";
                     cout << "Qual numero deseja procurar?: ";
                     cin >> num_search;
+
+                    //Armazena os resultados na struct, para imprimir a tabela
                     tempo = normal_search(array, size, num_search);
+                    tabela[posicao].size = size;
+                    strcpy(tabela[posicao].sort, "Norma Search");
+                    tabela[posicao].tempo_execucao = tempo;
                     print_time(tempo);
+
+                    //Limite de posição da tabela, não ultrapassa a posição 20
+                    if(posicao<20)
+                        posicao++;
                     break;
-                    
+
                 case 6:
+                    //Completa o array de inteiros com numeros aleatorios
                     fill_array(size, array);
+
+                    //Limite de print do array para não ficar imprimindo um array muito grande
                     if(size <= Max_print)
                         print_array(size, array);
                     break;
-                    
+
                 default:
                     break;
             }
-        }while(opcao != 0);
 
-        delete[] array; 
+        }while(opcao != 0);
+        
+        //Desaloca o array alocado dinamicanete 
+        delete[] array;
         cout << "\n 1. Deseja criar um novo array" << endl;
         cout << " 0. Encerrar programa" <<endl;
         cout << "--> ";
         cin >> opcao;
         cout << "\n\n";
 
-    }while(opcao == 1);
+    }while(opcao == 1); //Sai do programa apenas quando for diferente de 1
+
+    //Realiza a impressao final da tabela com os resultados obtidos
+    cout << "=========================================================================================================\n";
+    printar_tabela(tabela,posicao);
+    cout << "=========================================================================================================\n";
     return 0;
 }
