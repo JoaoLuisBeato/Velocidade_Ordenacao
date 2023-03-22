@@ -47,3 +47,5 @@ Sendo a opção 1, 2 e 3 algoritmos de ordenação de números inteiros, 4 e 5 a
 Ao escolher alguma opção de ordenação, os dados de tamanho do array, tipo de ordenação e o tempo de execução ficará salvo em uma string, que será printada como uma tabela, na qual cabe no máximo 20 tentativas de ordenação de arrays e, caso ultrapasse, a nova informação sobrescreverá a ultima para evitar uma sobrecarga. Portanto, caso não queira perder a vigézima informação, é preferível que tire o print da tabela e reinicie o programa (ou limpe a tabela) antes de rodar um array novo para ordenação.
 
 Dessa forma, ao final de cada busca ou ordenação, é exibida ao terminal em unidades o tamanho do array, tipo de ordenação e o tempo que levou para terminar a execução em segundos, milisegundos e microssegundos.
+Ao final da execução do programa, é listada uma tabela no termina com os tempos de execução de cada algoritmo
+para cada vetor utilizado.
