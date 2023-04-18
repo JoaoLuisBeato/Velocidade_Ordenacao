@@ -5,4 +5,7 @@ print(vetor)
 response = requests.post('http://127.0.0.1:5000/quickSort', json={'array': vetor})
 
 vetor = response.json().get('array_sort')
+tempo = response.json().get('tempo_execucao')
+
 print(vetor)
+print('Tempo de execução: %.4f' %tempo)
