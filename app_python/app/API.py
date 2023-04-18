@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    return 'Home Page'
+    return '<h1>Home Page<h1>'
 
 @app.route('/sort', methods=['POST'])
 def sort():

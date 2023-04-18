@@ -1,12 +1,12 @@
-FROM python:3
-
-COPY . /app
+FROM ubuntu
 
 WORKDIR /app
 
-RUN pip install flask
+COPY . /app
 
-EXPOSE 5000
+RUN apt update
+RUN apt install python3-pip -y
+RUN pip3 install flask
 
-CMD python API.py
+ CMD ["python3", "-m", "API", "run", "--host=0.0.0.0"]
 
