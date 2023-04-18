@@ -95,7 +95,6 @@ def insertionSort(array):
     return array
 
 @app.route('/normalSearch', methods = ['POST'])
-
 def normalSearch():
 
     tempo_inicial = time.time()
@@ -119,8 +118,8 @@ def normalSearch():
         return jsonify({'resposta': "O numero nao existe", 'tempo_execucao': tempo_de_execucao})
 
 
-@app.route('/binarySearch', methods = ['POST'])
 
+@app.route('/binarySearch', methods = ['POST'])
 def binarySearch():
 
     array = request.json.get('array')
