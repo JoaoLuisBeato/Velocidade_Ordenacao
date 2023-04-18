@@ -94,4 +94,4 @@ def insertionSort(array):
         array[j + 1] = key
     return array
 
-app.run()
+app.run(host='0.0.0.0', port=80)
