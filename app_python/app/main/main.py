@@ -2,21 +2,11 @@ import requests
 import numpy as np
 
 vetor = [4, 2, 1, 5, 3, 10, 44, 7, 13, 64, 99, 21, 45]
-print(vetor)
-numero  = 44
-response = requests.post('http://172.17.0.3:80/normalSearch', json={'array': vetor, 'number_search': numero})
 
-#vetor = response.json().get('array_sort')
-resposta = response.json().get('resposta')
-tempo = response.json().get('tempo_execucao')
-
-print(vetor)
-print('Tempo de execução: %.4f' %tempo)
-print(resposta)
 
 Lista = []
 def Message():
-    opcao = 0;
+    opcao = 0
     print("Digite a opcao:")
     print("1. Bubble Sort")
     print("2. Insertion Sort")
@@ -27,50 +17,79 @@ def Message():
     print("0. Exit")
     opcao = int (input("Opção selecionada: "))
     return opcao
+       
+def Sort(vetor):
+    response = requests.post('http://172.17.0.3:80/Sort', json={'array': vetor})
+    vetor = response.json().get('array_sort')
+    tempo = response.json().get('tempo_execucao')
+    return tempo
 
-def switch(opcao):
+    
+def insertion_sort(vetor):
+    response = requests.post('http://172.17.0.3:80/insertionSort', json={'array': vetor})
+    vetor = response.json().get('array_sort')
+    tempo = response.json().get('tempo_execucao')
+    return tempo
+    
+def quick_sort(vetor):
+    response = requests.post('http://172.17.0.3:80/quickSort', json={'array': vetor})
+    vetor = response.json().get('array_sort')
+    tempo = response.json().get('tempo_execucao')
+    return tempo
+
+def binarySearch(vetor,numero):
+    response = requests.post('http://172.17.0.3:80/quickSort', json={'array': vetor, 'number_search': numero})
+    vetor = response.json().get('array_sort')
+    tempo = response.json().get('tempo_execucao')
+    return tempo
+
+def normal_search(vetor,numero):
+    response = requests.post('http://172.17.0.3:80/quickSort', json={'array': vetor, 'number_search': numero})
+    vetor = response.json().get('array_sort')
+    tempo = response.json().get('tempo_execucao')
+    return tempo
+
+
+
+def switch(opcao,array):
     if opcao == 1:
-        tempo = bubble_sort(size, array)
+        tempo = Sort(array)
         tabela = np.array([('Bubble', size, tempo)],
         dtype=[('Sort', (np.str_, 10)), ('Size', np.int32), ('Tempo', np.float64)])
         Lista.append(tabela)
-        if size <= max_print:
-            print_array(size, array)
+        
     if opcao == 2:
         tempo = insertion_sort(size, array)
-        tabela = np.array([('Bubble', size, tempo)],
-        dtype=[('Sort', (np.str_, 10)), ('Size', np.int32), ('Tempo', np.float64)])
-        Lista.append(Bubble_sort)
-        if size <= max_print:
-            print_array(size, array)
-    if opcao == 3:
-        tempo = quick_sort(size, array)
-        tabela = np.array([('Bubble', size, tempo)],
+        tabela = np.array([('Insertion Sort', size, tempo)],
         dtype=[('Sort', (np.str_, 10)), ('Size', np.int32), ('Tempo', np.float64)])
         Lista.append(tabela)
-        if size <= max_print:
-            print_array(size, array)
+        
+    if opcao == 3:
+        tempo = quick_sort(size, array)
+        tabela = np.array([('Quick Sort', size, tempo)],
+        dtype=[('Sort', (np.str_, 10)), ('Size', np.int32), ('Tempo', np.float64)])
+        Lista.append(tabela)
+        
+
     if opcao == 4:
         print ("\n\n==========================\n")
         num_search = int(input("Qual numero deseja procurar?: "))
 
         tempo = binarySearch(array, num_search, 0, size-1)
-        tabela = np.array([('Bubble', size, tempo)],
+        tabela = np.array([('Binary Search', size, tempo)],
         dtype=[('Sort', (np.str_, 10)), ('Size', np.int32), ('Tempo', np.float64)])
         Lista.append(tabela)
-        if size <= max_print:
-            print_array(size, array)
           
     if opcao == 5:
         print ("\n\n==========================\n")
         num_search = int(input("Qual numero deseja procurar?: "))
 
-        tempo = binarySearch(array, size, num_search)
-        tabela = np.array([('Bubble', size, tempo)],
+        tempo = normal_search(array, size, num_search)
+        tabela = np.array([('Normal Search', size, tempo)],
         dtype=[('Sort', (np.str_, 10)), ('Size', np.int32), ('Tempo', np.float64)])
         Lista.append(tabela)
-        if size <= max_print:
-            print_array(size, array)
+        
+        
 while True:
     size = input("Digite o tamanho do array: ")
     while True:
