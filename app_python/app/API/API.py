@@ -94,4 +94,58 @@ def insertionSort(array):
         array[j + 1] = key
     return array
 
+@app.route('/normalSearch', methods = ['POST'])
+
+def normalSearch():
+
+    tempo_inicial = time.time()
+    vetor = request.json.get('array')
+    size = len(vetor)
+    numsearch = request.json.get('number_search')
+
+    check = 0
+
+    for step in range(size):
+        if (vetor[step] == numsearch):
+            check = 1
+
+    tempo_final = time.time()
+    tempo_de_execucao = tempo_final - tempo_inicial
+
+    if check == 1:
+        return jsonify({'resposta': "O numero existe", 'tempo_execucao': tempo_de_execucao})
+
+    else: 
+        return jsonify({'resposta': "O numero nao existe", 'tempo_execucao': tempo_de_execucao})
+
+
+@app.route('/binarySearch', methods = ['POST'])
+
+def binarySearch():
+
+    array = request.json.get('array')
+    numsearch = request.json.get('number_search')   
+    low = 0
+    high = len(array)
+    tempo_inicial = time.time()
+    # Repeat until the pointers low and high meet each other
+    while low <= high:
+
+        mid = low + (high - low)//2
+
+        if array[mid] == numsearch:
+            tempo_final = time.time()
+            tempo_de_execucao = tempo_final - tempo_inicial
+            return jsonify({'resposta': "O numero existe", 'tempo_execucao': tempo_de_execucao})
+
+        elif array[mid] < numsearch:
+            low = mid + 1
+
+        else:
+            high = mid - 1
+
+    tempo_final = time.time()
+    tempo_de_execucao = tempo_final - tempo_inicial
+    return jsonify({'resposta': "O numero nao existe", 'tempo_execucao': tempo_de_execucao})
+
 app.run(host='0.0.0.0', port=80)
