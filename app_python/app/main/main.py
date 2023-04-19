@@ -122,4 +122,6 @@ print('\n\n')
 
 print(*Lista, sep = "\n")
 
+print('\n\n')
+
         
