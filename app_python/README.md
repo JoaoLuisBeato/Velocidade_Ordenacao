@@ -6,7 +6,7 @@ João Luís Beato Cardoso,
 Mateus José Whitaker Filipe,
 Rafael Rodrigues Sato,
 Yuka Sakai.
-
+-
     Terceira Tarefa - Velocidade para ordenação e busca!
 
 
@@ -17,10 +17,14 @@ A execução do código tem como pré-requisito o software Docker. A partir dele
 Agora dentro do terminal digite os seguintes comandos:
 
     -> docker build . -t nome_escolhido:<versão> (recomendável 1.0)
-        Ex: docker build . -t ordenacao:1.1
+        docker build -t app-docker:1.0 .    (Docker app)
+        docker build -t api-docker:1.0 .    (Docker API)
         
-    -> docker run --rm -it nome_escolhido:<versão>
-        Ex: docker run --rm -it ordenacao:1.1
+        
+        
+    -> docker run -it nome_escolhido:<versão>
+        docker run -it app-docker:1.0                 (Docker app)
+        docker run -it -p 3000:80 api-docker:1.0      (Docker API)
 
 
 
@@ -34,7 +38,7 @@ Primeiramente, o software requisita ao usuário um números entre 10.000 e 1.000
 
 Após essa etapa, tem-se ao usuário a escolha das seguintes opções
 
-* 1 Bubble Sort
+* 1 Python Sort
 * 2 Insertion Sort
 * 3 Quick Sort
 * 4 Binery Search
@@ -49,3 +53,6 @@ Ao escolher alguma opção de ordenação, os dados de tamanho do array, tipo de
 Dessa forma, ao final de cada busca ou ordenação, é exibida ao terminal em unidades o tamanho do array, tipo de ordenação e o tempo que levou para terminar a execução em segundos, milisegundos e microssegundos.
 Ao final da execução do programa, é listada uma tabela no termina com os tempos de execução de cada algoritmo
 para cada vetor utilizado.
+
+## Atualizações finais
+Agora as funções deixaram de ser locais e exclusivas ao programa para serem gerenciadas por uma API, o que implica na possibilidade de um usuário externo utilizar uma das funções implementadas no programa sem ter ele localmente em sua máquina. Por exemplo, um usuário pode requerir um Insertion Sort, dessa forma, uma requisição é feita para a API e é devolvido o vetor ordenado utilizando o sort escolhido e também o tempo de execução, sem que ele precise ter o programa com todos os sorts em sua máquina.
