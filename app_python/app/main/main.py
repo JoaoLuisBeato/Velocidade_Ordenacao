@@ -1,8 +1,5 @@
 import requests
-import numpy as np
 import random
-
-#vetor = [4, 2, 1, 5, 3, 10, 44, 7, 13, 64, 99, 21, 45]
 
 
 Lista = []
@@ -25,33 +22,33 @@ def Message():
        
 def Sort(vetor):
 
-    response = requests.post('http://192.168.0.10:80/sort', json={'array': vetor})
+    response = requests.post('http://172.17.0.2:80/sort', json={'array': vetor})
     vetor = response.json().get('array_sort')
     tempo = response.json().get('tempo_execucao')
     return tempo
 
     
 def insertion_sort(vetor):
-    response = requests.post('http://192.168.0.10:80/insertionSort', json={'array': vetor})
+    response = requests.post('http://172.17.0.2:80/insertionSort', json={'array': vetor})
     vetor = response.json().get('array_sort')
     tempo = response.json().get('tempo_execucao')
     return tempo
     
 def quick_sort(vetor):
-    response = requests.post('http://192.168.0.10:80/quickSort', json={'array': vetor})
+    response = requests.post('http://172.17.0.2:80/quickSort', json={'array': vetor})
     vetor = response.json().get('array_sort')
     tempo = response.json().get('tempo_execucao')
     return tempo
 
 def binary_search(vetor,numero):
-    response = requests.post('http://192.168.0.10:80/binarySearch', json={'array': vetor, 'number_search': numero})
+    response = requests.post('http://172.17.0.2:80/binarySearch', json={'array': vetor, 'number_search': numero})
     resposta = response.json().get('resposta')
     print(resposta + "\n")
     tempo = response.json().get('tempo_execucao')
     return tempo
 
 def normal_search(vetor,numero):
-    response = requests.post('http://192.168.0.10:80/normalSearch', json={'array': vetor, 'number_search': numero})
+    response = requests.post('http://172.17.0.2:80/normalSearch', json={'array': vetor, 'number_search': numero})
     resposta = response.json().get('resposta')
     print(resposta + "\n")
     tempo = response.json().get('tempo_execucao')
@@ -109,6 +106,9 @@ while True:
                 tempo = normal_search(array, num_search)
                 tabela = "\tNormal Search " + "\tTamanho: " + str(size) + "\tTempo: " + str(tempo)
                 Lista.append(tabela)
+            
+            case 6:
+                array = fill_array(array,size)
                      
         print('\nTempo de execução: %.6f' %tempo)
         posicao_tabela += 1
