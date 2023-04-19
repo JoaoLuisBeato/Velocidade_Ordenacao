@@ -96,7 +96,7 @@ def insertionSort(array):
 
 @app.route('/normalSearch', methods = ['POST'])
 def normalSearch():
-
+    print("cheguei")
     tempo_inicial = time.time()
     vetor = request.json.get('array')
     size = len(vetor)
@@ -122,22 +122,24 @@ def normalSearch():
 @app.route('/binarySearch', methods = ['POST'])
 def binarySearch():
 
-    array = request.json.get('array')
+    tempo_inicial = time.time()
+    
+    vetor = request.json.get('array')
     numsearch = request.json.get('number_search')   
     low = 0
-    high = len(array)
-    tempo_inicial = time.time()
+    high = len(vetor)
+    
     # Repeat until the pointers low and high meet each other
     while low <= high:
 
         mid = low + (high - low)//2
 
-        if array[mid] == numsearch:
+        if (vetor[mid] == numsearch):
             tempo_final = time.time()
             tempo_de_execucao = tempo_final - tempo_inicial
             return jsonify({'resposta': "O numero existe", 'tempo_execucao': tempo_de_execucao})
 
-        elif array[mid] < numsearch:
+        if (vetor[mid] < numsearch):
             low = mid + 1
 
         else:
